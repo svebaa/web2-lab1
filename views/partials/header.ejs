@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="hr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title><%= title %> / Propusnice</title>
+  <link rel="stylesheet" href="/assets/style.css">
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="/">Propusnice</a>
+    <nav>
+      <a href="/">Početna</a>
+      <% if (typeof user !== 'undefined' && user) { %>
+        <a href="/manage">Upravljanje</a>
+        <a href="/logout">Odjava</a>
+      <% } else if (typeof authConfigured !== 'undefined' && authConfigured) { %>
+        <a class="button small" href="/login">Prijava</a>
+      <% } %>
+    </nav>
+  </header>
+  <main>

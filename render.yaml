@@ -1,0 +1,34 @@
+services:
+    - type: web
+      name: web2-propusnice
+      runtime: node
+      plan: free
+      region: frankfurt
+      buildCommand: npm ci --omit=dev
+      startCommand: npm start
+      healthCheckPath: /health
+      envVars:
+          - key: NODE_ENV
+            value: production
+          - key: DATABASE_URL
+            fromDatabase:
+                name: web2-propusnice-db
+                property: connectionString
+          - key: BASE_URL
+            sync: false
+          - key: AUTH0_ISSUER_BASE_URL
+            sync: false
+          - key: AUTH0_AUDIENCE
+            value: https://web2-lab1/passes
+          - key: AUTH0_CLIENT_ID
+            sync: false
+          - key: AUTH0_CLIENT_SECRET
+            sync: false
+          - key: SESSION_SECRET
+            generateValue: true
+
+databases:
+    - name: web2-propusnice-db
+      plan: free
+      region: frankfurt
+      databaseName: web2_lab1

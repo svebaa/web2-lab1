@@ -1,0 +1,14 @@
+node_modules/
+.env
+.env.*
+!.env.example
+dist/
+coverage/
+.local/
+docs/
+.DS_Store
+.vscode/
+*.log
+# PNG propusnice koje automat sprema u radni direktorij.
+/*.png
+submission.json

@@ -1,0 +1,12 @@
+<%- include('partials/header', { title: 'Podaci propusnice' }) %>
+<p class="eyebrow">Provjera propusnice</p>
+<section class="panel pass-card">
+  <span class="badge <%= pass.status === 'ACTIVE' ? 'active' : 'cancelled' %>"><%= pass.status %></span>
+  <h1><%= pass.name %></h1>
+  <dl>
+    <dt>Oznaka dokumenta</dt><dd><%= pass.document %></dd>
+    <dt>Vrijeme izdavanja</dt><dd><time datetime="<%= new Date(pass.issuedAt).toISOString() %>"><%= formatDate(pass.issuedAt) %></time></dd>
+    <dt>Identifikator propusnice</dt><dd class="identifier"><%= pass.id %></dd>
+  </dl>
+</section>
+<%- include('partials/footer') %>

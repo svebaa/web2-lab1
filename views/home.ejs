@@ -1,0 +1,21 @@
+<%- include('partials/header', { title: 'Početna' }) %>
+<section class="intro">
+  <h1>Digitalne propusnice</h1>
+  <p class="lead">Provjeri propusnicu skeniranjem QR koda. Za pregled i upravljanje svim propusnicama prijavi se svojim računom.</p>
+</section>
+<section class="stats" aria-label="Broj propusnica">
+  <article class="stat"><span>Ukupno propusnica</span><strong><%= counts.total %></strong></article>
+  <article class="stat"><span>Aktivne propusnice</span><strong><%= counts.active %></strong></article>
+</section>
+<section class="panel callout">
+  <% if (user) { %>
+    <div><h2>Upravljanje propusnicama</h2><p>Pregledaj podatke, poništi ili obriši pojedinu propusnicu.</p></div>
+    <a class="button" href="/manage">Otvori pregled →</a>
+  <% } else if (authConfigured) { %>
+    <div><h2>Prijavi se za pregled i upravljanje propusnicama.</h2></div>
+    <a class="button" href="/login">Prijavi se →</a>
+  <% } else { %>
+    <div><h2>Provjera propusnica</h2><p>Javne propusnice možeš otvoriti njihovim QR kodom. Prijava trenutačno nije dostupna.</p></div>
+  <% } %>
+</section>
+<%- include('partials/footer') %>

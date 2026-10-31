@@ -1,0 +1,35 @@
+<%- include('partials/header', { title: 'Upravljanje' }) %>
+<p class="eyebrow">Upravljanje</p>
+<h1>Sve propusnice</h1>
+<p class="lead">Poništena propusnica ostaje vidljiva. Brisanjem se trajno uklanja.</p>
+<% if (!passes.length) { %>
+  <section class="panel"><h2>Još nema propusnica</h2><p>Izdane propusnice pojavit će se ovdje.</p></section>
+<% } else { %>
+  <div class="table-wrap panel">
+    <table class="passes-table" aria-label="Sve propusnice">
+      <thead><tr><th scope="col">Osoba / dokument</th><th scope="col">Izdano</th><th scope="col">Status</th><th scope="col">Radnje</th></tr></thead>
+      <tbody>
+        <% for (const pass of passes) { %>
+          <tr>
+            <td><a href="/info/<%= pass.id %>"><strong><%= pass.name %></strong></a><span class="secondary"><%= pass.document %></span></td>
+            <td class="issued-at"><%= formatDate(pass.issuedAt) %></td>
+            <td><span class="badge <%= pass.status === 'ACTIVE' ? 'active' : 'cancelled' %>"><%= pass.status %></span></td>
+            <td>
+              <div class="actions">
+                <% if (pass.status === 'ACTIVE') { %>
+                  <form method="post" action="/manage/<%= pass.id %>/cancel">
+                    <button class="button secondary-button small" type="submit">Poništi</button>
+                  </form>
+                <% } %>
+                <form method="post" action="/manage/<%= pass.id %>/delete">
+                  <button class="button danger small" type="submit">Obriši</button>
+                </form>
+              </div>
+            </td>
+          </tr>
+        <% } %>
+      </tbody>
+    </table>
+  </div>
+<% } %>
+<%- include('partials/footer') %>
